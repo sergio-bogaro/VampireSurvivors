@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://cqvcfg3etuitv"]
+
+[ext_resource type="Texture2D" uid="uid://dsocnttaiwc02" path="res://Scenes/Player/Player.png" id="1_adbjm"]
+[ext_resource type="Script" path="res://Scenes/Player/player.gd" id="1_pwek4"]
+[ext_resource type="Script" path="res://Resources/Components/PlayerHealthComponent.gd" id="2_2cii3"]
+[ext_resource type="Script" path="res://Scenes/Player/PlayerHealth.gd" id="2_chg85"]
+[ext_resource type="PackedScene" uid="uid://dsw5yhb871fay" path="res://Scenes/Abilities/SwordAbility/SwordAbilityController.tscn" id="2_f84tw"]
+[ext_resource type="PackedScene" uid="uid://brrnw8fvb2t57" path="res://Resources/HurtBox_Player.tscn" id="4_tauck"]
+[ext_resource type="PackedScene" uid="uid://bvbspv2h63on" path="res://UI/DefeatScreen.tscn" id="4_wdwlj"]
+[ext_resource type="Script" path="res://Resources/HurtBox.gd" id="5_3nak0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_81vc3"]
+radius = 40.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qetb6"]
+radius = 7.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bopqg"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 2
+motion_mode = 1
+script = ExtResource("1_pwek4")
+MAX_SPEED = 125
+ACELLERATION = 25
+FRICTION = 90
+
+[node name="PlayerHealth" type="ProgressBar" parent="." node_paths=PackedStringArray("playerHealth")]
+custom_minimum_size = Vector2(32, 6)
+offset_left = -16.0
+offset_top = -22.0
+offset_right = 16.0
+offset_bottom = -16.0
+pivot_offset = Vector2(16, 3)
+max_value = 1.0
+show_percentage = false
+script = ExtResource("2_chg85")
+playerHealth = NodePath("../PlayerHealthComponent")
+
+[node name="PlayerHealthComponent" type="Node" parent="."]
+script = ExtResource("2_2cii3")
+DefeatScreen = ExtResource("4_wdwlj")
+MAX_HEALTH = 10
+
+[node name="AbillityManager" type="Node2D" parent="."]
+
+[node name="SwordAbillityController" parent="AbillityManager" node_paths=PackedStringArray("Player") instance=ExtResource("2_f84tw")]
+visible = false
+AbilityCD = 1.0
+Player = NodePath("../..")
+
+[node name="ExpCollectionArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExpCollectionArea"]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_81vc3")
+
+[node name="Hurtbox_Player" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("4_tauck")]
+visible = false
+position = Vector2(1, -6)
+script = ExtResource("5_3nak0")
+healthComponent = NodePath("../PlayerHealthComponent")
+
+[node name="CollisionShape2D" parent="Hurtbox_Player" index="0"]
+position = Vector2(-1, -1)
+shape = SubResource("CircleShape2D_qetb6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_adbjm")
+offset = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_bopqg")
+
+[editable path="Hurtbox_Player"]

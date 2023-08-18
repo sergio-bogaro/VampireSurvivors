@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://btowjuwb7upga"]
+
+[ext_resource type="Script" path="res://Scenes/Enemies/basic_enemy.gd" id="1_uucws"]
+[ext_resource type="PackedScene" uid="uid://g8xbojo4rt4q" path="res://Resources/HurtBox_Enemy.tscn" id="2_x8xjm"]
+[ext_resource type="PackedScene" uid="uid://by6alj6la1y6g" path="res://Resources/Components/HealthComponent.tscn" id="3_0gupn"]
+[ext_resource type="PackedScene" uid="uid://cfbsepgpaxu0x" path="res://Resources/Components/ExpDropComponent.tscn" id="3_nmn6l"]
+[ext_resource type="PackedScene" uid="uid://pwmrdaretxbr" path="res://Scenes/Experience/SmallExpVial.tscn" id="4_wj82w"]
+[ext_resource type="PackedScene" uid="uid://cqvgefasvj5ce" path="res://Resources/HitBox_Enemy.tscn" id="6_dfgl7"]
+[ext_resource type="Script" path="res://Resources/HitBox.gd" id="7_3keoc"]
+
+[node name="BasicEnemy" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_uucws")
+healthComponent = NodePath("HealthComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_0gupn")]
+
+[node name="ExpDropComponent" parent="." node_paths=PackedStringArray("HealthManager") instance=ExtResource("3_nmn6l")]
+HealthManager = NodePath("../HealthComponent")
+ExpDropList = Array[PackedScene]([ExtResource("4_wj82w")])
+
+[node name="HurtBox_Enemy" parent="." instance=ExtResource("2_x8xjm")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="HitBox_Enemy" parent="." instance=ExtResource("6_dfgl7")]
+script = ExtResource("7_3keoc")
+
+[editable path="HurtBox_Enemy"]
+[editable path="HitBox_Enemy"]

@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://pwmrdaretxbr"]
+
+[ext_resource type="PackedScene" uid="uid://elula41wjvil" path="res://Resources/experienceVial.tscn" id="1_wxthy"]
+[ext_resource type="Texture2D" uid="uid://mlgxsdgdob0" path="res://Scenes/Experience/Small.png" id="2_2fhhw"]
+
+[node name="ExperienceVial" instance=ExtResource("1_wxthy")]
+XP_VALUE = 5
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_2fhhw")

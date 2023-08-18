@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnf8ecpiqbsoy"]
+
+[ext_resource type="Script" path="res://UI/AbilityCard.gd" id="1_vwy8i"]
+
+[node name="AbilityCard" type="PanelContainer"]
+custom_minimum_size = Vector2(120, 160)
+script = ExtResource("1_vwy8i")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "title"
+
+[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "title"
+autowrap_mode = 2
