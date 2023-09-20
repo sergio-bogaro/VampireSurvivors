@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://bf740jknwbptq"]
 
 [ext_resource type="Script" path="res://Scenes/Managers/EnemyManager.gd" id="1_oej3m"]
 [ext_resource type="PackedScene" uid="uid://jbogdu63ml7" path="res://Scenes/Enemies/BrownRat/BrownRat.tscn" id="2_2ffi1"]
@@ -8,4 +8,5 @@ script = ExtResource("1_oej3m")
 enemyList = ExtResource("2_2ffi1")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 autostart = true
